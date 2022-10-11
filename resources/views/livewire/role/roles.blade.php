@@ -31,7 +31,10 @@
             <tbody>
 
             @foreach($roles as $role)
-                <tr class="bg-white border-b" :class="darkMode == 0 ? 'dark:bg-gray-900 dark:border-gray-700' : 'bg-amber-50'">
+                <tr class="bg-white border-b" :class="darkMode == 0 ? 'dark:bg-gray-900 dark:border-gray-700' : 'bg-amber-50'"
+                    x-transition:enter.duration.900ms
+                    x-transition:leave.duration.400ms
+                >
                     <th
                         class="py-4 px-6 font-medium text-gray-900 whitespace-nowrap select-none cursor-pointer"
                         :class="darkMode == 0 ? 'dark:text-white' : 'text-black'">
