@@ -20,4 +20,11 @@
         <livewire:permission.permissions />
 
     </div>
+    <script>
+        document.addEventListener('alpine:init', () => {
+            Alpine.data('nav', () => ({
+                active: 'role',
+            }))
+        })
+    </script>
 </x-superAdmin-layout>

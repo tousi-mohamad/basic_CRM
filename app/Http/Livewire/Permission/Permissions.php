@@ -27,7 +27,10 @@ class Permissions extends Component
     }
     public function updateDarkMode($value)
     {
-        dd($value);
+
+      if ($value == 0): $this->darkMode = 1; else: $this->darkMode = 0; endif;
+
+      $this->render();
     }
     public function edit($itemId,$value)
     {

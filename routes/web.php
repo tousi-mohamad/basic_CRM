@@ -17,6 +17,15 @@ use Illuminate\Support\Facades\Route;
 Route::get('/', function () {
     return view('welcome');
 });
+Route::get('/test', function () {
+
+
+        $role = \Spatie\Permission\Models\Role::where('name','shameza')->first();
+        $permission = \Spatie\Permission\Models\Permission::where('name','Ehsan')->first();
+
+    $role->givePermissionTo($permission);
+
+});
 
 Route::get('/dashboard', function () {
     return view('dashboard');
