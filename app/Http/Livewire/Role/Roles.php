@@ -24,6 +24,19 @@ class Roles extends Component
             $this->darkMode = 0;
         }
     }
+
+    public function per_assign_revoke($roleId,$perName){
+//        dd($roleId,$perName);
+        $role = Role::find($roleId);
+
+        if(!$role->hasPermissionTo($perName)){ // add permission
+            $role->givePermissionTo($perName);
+        }else{ //already has permission so revoke
+            $role->revokePermissionTo($perName);
+        }
+
+    }
+
     public function edit($itemId,$value)
     {
         Role::where('id',$itemId)->update(['name'=>$value]);

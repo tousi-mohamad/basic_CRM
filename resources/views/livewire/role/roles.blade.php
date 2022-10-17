@@ -1,6 +1,6 @@
 <div>
 
-    <div class="border-t overflow-x-auto relative shadow-md sm:rounded-lg w-1/2"
+    <div class="border-t overflow-x-auto relative shadow-md sm:rounded-lg w-2/3"
          x-data="{
          darkMode : 0,
          inputType: 'text',
@@ -24,6 +24,7 @@
             <tr>
                 <th scope="col" class="py-3 px-6">Role</th>
                 <th scope="col" class="py-3 px-6">Edit</th>
+                <th scope="col" class="py-3 px-6">Assign Permission</th>
                 <th scope="col" class="py-3 px-6">Delete</th>
 
             </tr>
@@ -50,6 +51,41 @@
                             <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
                                   d="M11 5H6a2 2 0 00-2 2v11a2 2 0 002 2h11a2 2 0 002-2v-5m-1.414-9.414a2 2 0 112.828 2.828L11.828 15H9v-2.828l8.586-8.586z"></path>
                         </svg>
+                    </td>
+                    <td class="m-3">
+                        <div x-data="{isOpen: false}">
+
+                            <button
+                                @click="isOpen = !isOpen"
+                                type="button"
+                                class="inline-flex justify-center w-full border border-gray-300 p-2"
+                                @keydown.escape="isOpen= false"
+                                aria-haspopup="true"
+                                aria-expanded="true"
+                            >Permissions
+                            </button>
+                            <div class="bg-white overflow-auto max-h-40"
+                                 x-show="isOpen"
+                                 x-transition:enter.duration.500ms
+                                 x-transition:leave.duration.400ms
+                                 @click.away="isOpen= false"
+                            >
+
+                                @foreach(\Spatie\Permission\Models\Permission::all() as $per)
+                                    <div class="flex justify-between p-2 text-black ">
+                                        <label for="per_{{$per->id}}">{{$per->name}}</label>
+                                        <input type="checkbox" id="per_{{$per->id}}"
+                                               class="focus:border-transparent focus:ring-0"
+                                               wire:click="per_assign_revoke({{$role->id}},'{{$per->name}}')"
+                                               @if(\Spatie\Permission\Models\Role::find($role->id)->hasPermissionTo($per->id)) checked @endif
+                                        >
+                                    </div>
+                                @endforeach
+
+                            </div>
+                        </div>
+
+
                     </td>
                     <td class="py-4 px-6 flex">
                         <svg wire:click="delete({{$role->id}})" id="trash_{{$role->id}}" @click="handleClick" data-timer="5"

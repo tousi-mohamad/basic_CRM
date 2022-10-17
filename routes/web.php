@@ -20,11 +20,8 @@ Route::get('/', function () {
 Route::get('/test', function () {
 
 
-        $role = \Spatie\Permission\Models\Role::where('name','shameza')->first();
-        $permission = \Spatie\Permission\Models\Permission::where('name','Ehsan')->first();
-
-    $role->givePermissionTo($permission);
-
+      $user = \App\Models\User::find(13);
+      dd($user->organization->name);
 });
 
 Route::get('/dashboard', function () {

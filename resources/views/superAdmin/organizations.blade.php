@@ -1,7 +1,11 @@
 <x-superAdmin-layout>
 
     <x-slot name="header">
-
+        <style>
+            tr{
+                text-align: center;
+            }
+        </style>
     </x-slot>
 
     <div class="py-12">

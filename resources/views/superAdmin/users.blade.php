@@ -2,6 +2,17 @@
 
     <x-slot name="header">
 
+        <style>
+            tr{
+                text-align: center;
+            }
+            td{
+                padding: 4px;
+            }
+            svg{
+                margin: 0 auto;
+            }
+        </style>
     </x-slot>
 
     <div class="py-12">

@@ -2,6 +2,15 @@
 
     <x-slot name="header">
         <style>
+            tr{
+                text-align: center;
+            }
+            td{
+                padding: 4px;
+            }
+            svg{
+                margin: 0 auto;
+            }
             span[aria-current="page"] span {
                 color: red !important;
                 font-weight: bolder !important;

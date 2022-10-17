@@ -1,5 +1,5 @@
 <div>
-    <div class="border-t overflow-x-auto relative shadow-md sm:rounded-lg w-1/2"
+    <div class="border-t overflow-x-auto relative shadow-md sm:rounded-lg w-full"
          x-data="{
          darkMode : 0,
          inputType: 'text',
@@ -29,6 +29,7 @@
                 <th scope="col" class="py-3 px-6">Edit</th>
                 <th scope="col" class="py-3 px-6">Roles</th>
                 <th scope="col" class="py-3 px-6">Permissions</th>
+                <th scope="col" class="py-3 px-6">Organizations</th>
                 <th scope="col" class="py-3 px-6">Delete</th>
 
             </tr>
@@ -36,6 +37,7 @@
             <tbody>
 
             @foreach($users as $user)
+
                 <tr class="bg-white border-b"
                     :class="darkMode == 0 ? 'dark:bg-gray-900 dark:border-gray-700' : 'bg-amber-50'">
                     <th
@@ -55,7 +57,7 @@
                                   d="M11 5H6a2 2 0 00-2 2v11a2 2 0 002 2h11a2 2 0 002-2v-5m-1.414-9.414a2 2 0 112.828 2.828L11.828 15H9v-2.828l8.586-8.586z"></path>
                         </svg>
                     </td>
-                    <td>
+                    <td class="m-3">
                         <div x-data="{isOpen: false}">
 
                             <button
@@ -90,7 +92,7 @@
 
 
                     </td>
-                    <td>
+                    <td class="m-3">
                         <div x-data="{isOpen: false}">
 
                             <button
@@ -124,6 +126,43 @@
                         </div>
 
 
+                    </td>
+                    <td class="m-3">
+                        <div x-data="{isOpen: false}">
+
+                            <button
+                                @click="isOpen = !isOpen"
+                                type="button"
+                                class="inline-flex justify-center w-full border border-gray-300 p-2"
+                                @keydown.escape="isOpen= false"
+                                aria-haspopup="true"
+                                aria-expanded="true"
+                            >{{$user->organization->name}}
+                            </button>
+                            <div class="bg-white overflow-auto max-h-40"
+                                 x-show="isOpen"
+                                 x-transition:enter.duration.500ms
+                                 x-transition:leave.duration.400ms
+                                 @click.away="isOpen= false"
+                            >
+                                <ul>
+                                    @foreach($organizations as $org)
+                                        <li class="hover:bg-gray-300 m-4 text-black cursor-pointer
+                                           @if($user->organization->id == $org->id) bg-blue-500 @endif
+                                           " wire:click="updateOrg({{$user->id}},{{$org->id}})">{{$org->name}}</li>
+
+                                    @endforeach
+                                </ul>
+
+
+                            </div>
+                        </div>
+
+                        {{--                        <div  >--}}
+                        {{--                            @foreach($organizations as $org)--}}
+                        {{--                                <span class="hover:bg-gray-50" wire:click="updateOrg({{$user->id}},{{$org->id}})">{{$org->name}}</span>--}}
+                        {{--                            @endforeach--}}
+                        {{--                        </div>--}}
                     </td>
 
                     <td class="py-4 px-6 flex">

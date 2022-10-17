@@ -2,6 +2,7 @@
 
 namespace App\Http\Livewire\Admin;
 
+use App\Models\Organization;
 use App\Models\User;
 use Livewire\Component;
 
@@ -33,8 +34,17 @@ class Users extends Component
 
     }
 
+    public function updateOrg($userId,$orgId){
+
+//        dd($userId,$orgId);
+        User::where('id',$userId)->update(['organization_id'=>$orgId]);
+    }
+
     public function render()
     {
-        return view('livewire.admin.users',['users' => User::paginate(20)]);
+        return view('livewire.admin.users',[
+            'users' => User::paginate(20),
+            'organizations' => Organization::all()
+            ]);
     }
 }

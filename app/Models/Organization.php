@@ -12,4 +12,9 @@ class Organization extends Model
     protected $fillable =['name','plan'];
 
 
+    public function user(){
+
+        return $this->hasMany(User::class);
+    }
+
 }

@@ -51,6 +51,7 @@
             </tr>
             <tr>
                 <th scope="col" class="py-3 px-6">Name</th>
+                <th scope="col" class="py-3 px-6">Plan</th>
                 <th scope="col" class="py-3 px-6">Edit</th>
                 <th scope="col" class="py-3 px-6">Delete</th>
 
@@ -68,6 +69,9 @@
                         <input id="input_{{$organization->id}}" x-bind:type="inputType" class="names_input hidden text-black border-b-cyan-500 border-r" value="{{$organization->name}}"
                                wire:change="edit({{$organization->id}},$event.target.value)">
                     </th>
+                    <td>
+                        {{$organization->plan}}
+                    </td>
                     <td class="py-4 px-6">
                         <svg class="w-6 h-6 cursor-pointer text-green-500" fill="none" data-id="{{$organization->id}}"
                              onclick="editName(this)"
